@@ -78,8 +78,8 @@ router.put(
 );
 
 router.delete(
-  "/vacation/:id([0-9]+)",
-  verifyAdminMW,
+  "/vacations/:id([0-9]+)",
+  
   async (req: Request, res: Response, next: NextFunction) => {
     try {
       const id = +req.params.id;

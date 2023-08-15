@@ -23,8 +23,8 @@ type DestinationCardProps = {
   description: string;
   id: number;
   onFavoriteClick: any;
-  startOn:Date
-  endOn:Date
+  startOn: Date
+  endOn: Date
   setRefreshKey: (value: React.SetStateAction<number>) => void
 };
 
@@ -47,14 +47,14 @@ const DestinationCard: React.FC<DestinationCardProps> = ({
   // const { user, logout } = useAuth();
 
   useEffect(() => {
-    
+
 
     const fetchFavoriteStatus = async () => {
       try {
         if (user?.user?.id && user.token) {
           let userID = +user?.user.id;
           const token = user.token
-          const favoriteStatus = await getUserFavoriteVacationStatus(userID, id,token);
+          const favoriteStatus = await getUserFavoriteVacationStatus(userID, id, token);
           setIsFavorite(favoriteStatus);
         }
       } catch (err) {
@@ -62,19 +62,21 @@ const DestinationCard: React.FC<DestinationCardProps> = ({
       }
     };
 
-    user.user?.role==="user"&&fetchFavoriteStatus();
+    user.user?.role === "user" && fetchFavoriteStatus();
   }, []); // Run the effect when user or id changes
 
   const handleEditClick = (id: number) => {
     navigate(`/edit/${id}`);
-    
+
   }
   const handleDelete = (id: number) => {
-    if (user && user.token) {
-      const token = user.token;
-      deleteVacation(id,token);
-      setRefreshKey(prev => prev+1)
-    }
+    
+    console.log("Trying to delete id:", id);
+    // const token = user.token;
+      deleteVacation(id);
+      setRefreshKey(prev => prev + 1)
+      
+
 
   }
 
@@ -88,10 +90,10 @@ const DestinationCard: React.FC<DestinationCardProps> = ({
         if (user.user?.id && user.token) {
           let userID = user.user?.id
           if (newState) {
-            addUserFavoriteVacation(+userID, id,user.token)
+            addUserFavoriteVacation(+userID, id, user.token)
           }
           else {
-            removeUserFavoriteVacation(+userID, id,user.token)
+            removeUserFavoriteVacation(+userID, id, user.token)
           }
         }
         onFavoriteClick();
@@ -108,38 +110,44 @@ const DestinationCard: React.FC<DestinationCardProps> = ({
   return (
     <Box sx={{ border: "1px solid #ccc", padding: "16px", position: "relative" }}>
       <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "8px" }}>
-    {user?.user?.role === "user" && (
-      <><Typography variant="h6" className="date">
-      {startOn.toString().split('T')[0]}    -    {endOn.toString().split('T')[0]}
-  </Typography>
-      
-      <IconButton
-            color="error"
-            aria-label="Add to favorites"
-            onClick={toggleFavorite}
-          >
-            {isFavorite ? <FavoriteIcon /> : <FavoriteBorderIcon />}
-          </IconButton></>
-    )}
-    {user?.user?.role === "admin" && (
-      <div>
-        <IconButton
-          color="primary"
-          aria-label="Edit"
-          onClick={() => handleEditClick(id)}
-        >
-          <EditIcon />
-        </IconButton>
-        <IconButton
-          color="error"
-          aria-label="Delete"
-          onClick={() => handleDelete(id)}
-        >
-          <DeleteIcon />
-        </IconButton>
-      </div>
-    )}
-</Box>
+        {user?.user?.role === "user" && (
+          <><Typography variant="h6" className="date">
+            {startOn.toString().split('T')[0]}    -    {endOn.toString().split('T')[0]}
+          </Typography>
+
+            <IconButton
+              color="error"
+              aria-label="Add to favorites"
+              onClick={toggleFavorite}
+            >
+              {isFavorite ? <FavoriteIcon /> : <FavoriteBorderIcon />}
+            </IconButton></>
+        )}
+        {user?.user?.role === "admin" && (
+          <div>
+            <Typography display={"inline-flex"} variant="h6" className="date">
+              {startOn.toString().split('T')[0]}    -    {endOn.toString().split('T')[0]}
+            </Typography>
+            <IconButton
+            sx={{marginRight:'auto'}}
+              color="primary"
+              aria-label="Edit"
+              onClick={() => handleEditClick(id)}
+              className="editIcon"
+            >
+              <EditIcon />
+            </IconButton>
+            <IconButton
+              className="deleteIcon"
+              color="error"
+              aria-label="Delete"
+              onClick={() => handleDelete(id)}
+            >
+              <DeleteIcon />
+            </IconButton>
+          </div>
+        )}
+      </Box>
       <img src={image} alt={name} style={{ width: "100%" }} />
       <Typography variant="subtitle1" sx={{ fontWeight: "bold", marginTop: "8px" }}>
         {name}

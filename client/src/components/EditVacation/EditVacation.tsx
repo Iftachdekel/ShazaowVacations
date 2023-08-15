@@ -11,7 +11,7 @@ import { selectUser } from "../../features/userSlice";
 const UpdateVacation = () => {
   const navigate = useNavigate()
   const user = useAppSelector(selectUser)
-  const onCancel = () => {navigate("/home")};
+  const onCancel = () => {navigate("/tours")};
   const {register,handleSubmit} = useForm<VacationType>();
   const [currentVacation , setCurrentVacatin] = useState<VacationType>()
   const {id} = useParams()

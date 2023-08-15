@@ -56,7 +56,7 @@ export const updateVacationLogic = async (vacation: VacationType): Promise<Vacat
 }
 export const deleteVacationLogic = async (id: number): Promise<void> => {
     const sql = `
-    DELETE FROM vacations WHERE vacationID = ${id}
+    DELETE FROM vacations WHERE id = ${id}
     `
     const info: OkPacket = await executeSql(sql);
     if (info.affectedRows === 0) resourceNotFound(id)

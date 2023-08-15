@@ -55,7 +55,7 @@ export const TourCard: React.FC<{
       >
         <DeleteIcon />
       </IconButton>
-      {/* <Typography>{tour.startOn.toISOString().split('T')[0]}</Typography> */}
+      
 
       <img
         src={tour.image}
