@@ -146,6 +146,7 @@ const Tours: React.FC = () => {
                 startOn={item.startOn}
                 endOn={item.endOn}
                 name={item.destination}
+                price={item.price}
                 image={constructImageUrl(item.imageFile)}
                 description={item.description}
                 onFavoriteClick={handleCardRefresh}

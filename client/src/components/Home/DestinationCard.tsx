@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Box, Typography, IconButton } from "@mui/material";
+import { Box, Typography, IconButton, Chip } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import FavoriteIcon from "@mui/icons-material/Favorite";
@@ -25,6 +25,7 @@ type DestinationCardProps = {
   onFavoriteClick: any;
   startOn: Date
   endOn: Date
+  price:number
   setRefreshKey: (value: React.SetStateAction<number>) => void
 };
 
@@ -37,6 +38,7 @@ const DestinationCard: React.FC<DestinationCardProps> = ({
   onFavoriteClick,
   startOn,
   endOn,
+  price,
   setRefreshKey
 }) => {
 
@@ -160,6 +162,8 @@ const DestinationCard: React.FC<DestinationCardProps> = ({
         {name}
       </Typography>
       <Typography variant="body2">{description}</Typography>
+      <div className="boxContainer"><Chip className="priceChip" color="secondary" label={price+'$'}></Chip></div>
+      
     </Box>
   );
 };

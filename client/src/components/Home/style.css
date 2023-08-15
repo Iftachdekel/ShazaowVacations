@@ -88,3 +88,22 @@ body {
 background-color: #c0e91e;
 border-radius: 10px;
 }
+.priceChip{
+    justify-content: center;
+    align-self: center;
+}
+.boxContainer {
+    position: relative; /* Makes it a positioning context for absolutely positioned children */
+    height: 60px;      /* Or whatever height you need */
+  }
+  
+  .priceChip {
+    position: absolute;
+    bottom: 0px;
+    margin-top: 90%;
+    left: 50%;        /* Positions the left edge of the chip at the center of the parent */
+    transform: translateX(-50%); /* Shifts the chip back by half its width to center it */
+    width: 120px;
+
+  }
+  

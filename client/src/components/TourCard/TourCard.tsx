@@ -6,7 +6,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import { useAuth } from "../AuthContext/AuthContext";
 
 export const TourCard: React.FC<{
-  tour: { startOn: Date, name: string; image: string; description: string; price: string };
+  tour: { startOn: Date, name: string; image: string; description: string; price: number };
 }> = ({ tour }) => {
   const user = useAuth();
   console.log(typeof tour.startOn);
