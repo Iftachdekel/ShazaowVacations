@@ -1,0 +1,90 @@
+style.css
+
+/* Fresh and young colors palette */
+:root {
+    --primary-color: #4CAF50; /* Green */
+    --secondary-color: #FFC107; /* Amber */
+    --accent-color: #E91E63; /* Pink */
+    --neutral-light: #FAFAFA; /* Light gray */
+    --neutral-dark: #333; /* Dark gray */
+}
+
+/* Base styles for the entire page */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: yellow;
+    color: var(--neutral-dark);
+}
+
+@font-face {
+    font-family: 'Crafter';
+    src: '../../Assets/Crafter.ttf';
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+/* Override Material-UI Typography */
+.MuiTypography-h4 {
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+.MuiTypography-h6 {
+    color: var(--secondary-color);
+    margin-bottom: 24px;
+}
+
+/* Override Material-UI Button */
+.MuiButton-outlined {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+    transition: all 0.3s ease-in-out;
+}
+
+.MuiButton-outlined:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.MuiButton-contained {
+    background-color: var(--accent-color);
+    color: white;
+    transition: all 0.3s ease-in-out;
+}
+
+.MuiButton-contained:hover {
+    background-color: var(--secondary-color);
+}
+
+.light {
+    width: 10px;
+    height: 10px;
+    background: red;
+    border-radius: 50%;
+       bottom: 295px;
+    position: absolute;
+    z-index: 10;
+    left: 20px;
+    animation: light 800ms ease-in-out 0s infinite alternate;
+  }
+  .cloud {
+    position: absolute;
+    top: 200px;
+    right: -500px;
+    opacity: .8;
+     animation: cloud 10s linear 0s infinite reverse;
+    z-index: 99;
+  }
+  @keyframes light {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+  }
+  @keyframes cloud {
+    from {right:-500px;}
+    to {right: 102%;}
+  }
+  .date{
+background-color: #c0e91e;
+border-radius: 10px;
+}

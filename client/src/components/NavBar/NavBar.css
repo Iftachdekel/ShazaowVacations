@@ -1,0 +1,49 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #a42b9a;
+  color: white;
+  padding: 10px 20px;
+  max-height: 40px;
+}
+
+.navbar-logo {
+  font-size: 1.5rem;
+  text-decoration: none;
+  color: white;
+  font-weight: 700;
+  font-size: 32px
+}
+
+.navbar-link {
+  margin: 0 10px;
+  text-decoration: none;
+  color: white;
+  font-weight: 800;
+  font-size: 32px
+}
+
+.navbar-link:hover {
+  text-decoration: underline;
+}
+
+.navbar-user {
+  display: inline;
+  align-items: center;
+}
+
+.logOut{
+  font-size: 18px;
+}
+.navbar-welcome {
+  margin-right: 10px;
+}
+
+.navbar-link,
+.navbar-user button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: white;
+}
