@@ -67,11 +67,7 @@ export const updatVacation = async (vacation: VacationType, id: number,token:str
 };
 
 export const deleteVacation = async (id: number): Promise<void> => {
-  // const headers = {
-  //   Authorization: `Bearer ${token}`,
-  //   "Content-Type": "multipart/form-data",
-    
-  // }
+  
   ;
   await axios.delete(appConfig.deletevacationUrl + `/${id}`
   );

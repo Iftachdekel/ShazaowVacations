@@ -70,11 +70,18 @@ const DestinationCard: React.FC<DestinationCardProps> = ({
 
   }
   const handleDelete = (id: number) => {
+    const isConfirmed = window.confirm("Are you sure you want to delete?");
     
-    console.log("Trying to delete id:", id);
-    // const token = user.token;
+    if (isConfirmed) {
       deleteVacation(id);
       setRefreshKey(prev => prev + 1)
+
+      console.log("Item deleted!");
+    } else {
+      console.log("Delete operation was cancelled.");
+    }    
+
+    // const token = user.token;
       
 
 
