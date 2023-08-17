@@ -17,7 +17,7 @@ const NavBar: React.FC = () => {
   const handleEXCEL = async () => {
     if (user?.token && user && user.role === "admin") {
             try {
-        await excelVacation();
+        await excelVacation(user.token);
       } catch (error) {
         console.error("Error updating vacation:", error);
       }

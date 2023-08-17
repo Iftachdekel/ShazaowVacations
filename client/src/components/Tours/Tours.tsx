@@ -98,7 +98,7 @@ const Tours: React.FC = () => {
       >
         
 
-        <Typography variant="h6" sx={{ marginBottom: "32px", fontFamily: 'Crafter, sans-serif' }}>
+        {user && user.user?.role === "user" &&        <Typography variant="h6" sx={{ marginBottom: "32px", fontFamily: 'Crafter, sans-serif' }}>
         Show only My Favorites 
         <Checkbox
           color="secondary"
@@ -106,7 +106,7 @@ const Tours: React.FC = () => {
           checked={filterType === "Fav"}
           onChange={() => setFilterType(filterType === "Fav" ? "All" : "Fav")}
         />
-        </Typography>
+        </Typography>}
 
         <Typography variant="h6" sx={{ marginBottom: "32px", fontFamily: 'Crafter, sans-serif' }}>
           Show only active vacations 

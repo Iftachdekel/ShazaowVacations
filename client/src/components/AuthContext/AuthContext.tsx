@@ -13,6 +13,7 @@ export interface AuthUser {
 }
 
 interface AuthContextType {
+  role: string;
   token: string | undefined;
   user: AuthUser | null;
   login: (userData: AuthUser) => void;
@@ -60,6 +61,7 @@ console.log('Authcontext: '+userData.email)
     logout,
     register,
     token: undefined,
+    role:""
 
   };
 

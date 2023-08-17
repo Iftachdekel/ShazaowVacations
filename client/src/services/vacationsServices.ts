@@ -117,7 +117,23 @@ export const getAllFutureVacations = async (): Promise<VacationType[]> => {
 };
 
 
-export const excelVacation = async (): Promise<void> => {
-
-  await axios.get(appConfig.excelUrl);
+export const excelVacation = async ( token:string): Promise<void> => {
+  const headers = {
+    Authorization: `Bearer ${token}`,
+    "Content-Type": "multipart/form-data",
+  };
+  await axios.get(appConfig.excelUrl, {
+    headers: headers,
+  }).then(response => {
+    const blob = new Blob([response.data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'vacations.xlsx';
+    a.click();
+    URL.revokeObjectURL(url);
+  })
+  .catch(error => {
+    console.error("Erreur lors de la requête Axios :", error);
+  });;
 };
