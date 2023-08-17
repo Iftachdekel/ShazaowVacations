@@ -6,6 +6,8 @@ export type AppConfigType = {
     favVacationUrl:string;
     vacationFollowers:string;
     deletevacationUrl: string
+    excelUrl:string;
+    chartdata:string;
 
 }
 

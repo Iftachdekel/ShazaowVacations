@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { TextField, Button, Box } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import { UserType } from "../../types/UserType";
-import { addNewUser, getAllUsers } from "../../services/usersServices";
+import { addNewUser, getAllUsers, loginUser } from "../../services/usersServices";
 import { RegisterUserType } from "../../types/RegisterUserType";
 import { useForm } from "react-hook-form";
 import { useAuth } from "../AuthContext/AuthContext";
@@ -33,13 +33,28 @@ const Register: React.FC = () => {
       },
     };
 
-
-    await addNewUser(send).then(() => authRegister(send));
-    navigate("/home");
-    console.log("Sending registration data:", send);
-
-  };
-
+    
+   
+      await addNewUser(send).then(() => authRegister(send));
+      const logInCredentials = {
+        password: send.user.password,
+        email: send.user.email
+      }
+      
+      try {
+        const { user, token } = await loginUser(logInCredentials);
+        // Save the token and user data wherever you need, if you want
+        alert('Welcome and logged in!');
+        navigate("/tours");
+      } catch (error) {
+        console.error("Error during automatic login after registration:", error);
+        alert('Registration successful but automatic login failed!');
+        navigate("/login"); // Redirect to login page so the user can log in manually
+      }
+      
+      console.log("Sending registration data:", send);
+    };
+    
   return (
     <Box
       sx={{

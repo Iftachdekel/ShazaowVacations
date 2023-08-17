@@ -8,7 +8,7 @@ import { UserContainer } from "../2 - Utils/cyber";
 import { resourceNotFound } from "../4 - Models/ErrorModels";
 import { FollowerType } from "../4 - Models/followerModel";
 
-export const getAllFollowersLogic = async (id: number): Promise<number> => {
+export const getAllFollowersForCounter = async (id: number): Promise<number> => {
   const sql = `
     SELECT COUNT(userID) from followers WHERE vacationID=${id}
     `;

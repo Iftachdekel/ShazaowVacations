@@ -93,6 +93,8 @@ export const getAllFavVacations = async (userid: number): Promise<VacationType[]
 
   return vacations;
 };
+
+
 export const getAllActiveVacations = async (): Promise<VacationType[]> => {
   const url = appConfig.vacationUrl + `/active`
   console.log(url)
@@ -112,4 +114,10 @@ export const getAllFutureVacations = async (): Promise<VacationType[]> => {
   const meetings = response.data as VacationType[];
 
   return meetings;
+};
+
+
+export const excelVacation = async (): Promise<void> => {
+
+  await axios.get(appConfig.excelUrl);
 };

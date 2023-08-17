@@ -6,9 +6,10 @@ import Home from "../components/Home/Home";
 
 import AddTourForm from "../components/AddTour/AddTour";
 // import UpdateVacation from "../components/EditVacation/EditVacation";
-import { AnyNaptrRecord } from "dns";
+
 import AdminCharts from "../components/AdminCharts/AdminCharts";
 import UpdateVacation from "../components/EditVacation/EditVacation";
+import ChartComponent from "../components/AdminCharts/AdminCharts";
 
 export const Routing = () => {
   const x: any = {};

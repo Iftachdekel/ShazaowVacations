@@ -4,8 +4,8 @@ import { VacationType, validateUpdateVacation, validateVacation } from "../4 - M
 import { v4 as uuid } from "uuid";
 import { OkPacket } from "mysql";
 import { resourceNotFound } from "../4 - Models/ErrorModels";
-import { verifyUserId } from "../2 - Utils/cyber";
-import { Request } from "express";
+
+
 
 export const getAllVacationsLogic = async (): Promise<VacationType[]> => {
     const sql = `
@@ -26,15 +26,16 @@ export const addVacationLogic = async (vacation: VacationType): Promise<Vacation
         //delete vacation.imageFile;
     }
     const sql = `INSERT INTO vacations
-        (destination, description, startOn, endOn, price,  imageFile)
+        (destination, description, startOn, endOn, price, imageName, imageFile)
         VALUES ("${vacation.destination}" ,"${vacation.description}","${vacation.startOn}",
-        "${vacation.endOn}","${vacation.price}",  "${vacation.imageName}")`
+        "${vacation.endOn}","${vacation.price}", "${vacation.imageName}", "${vacation.imageName}")`
     const info: OkPacket = await executeSql(sql);
 
     vacation.id = info.insertId;
 
     return vacation;
 }
+
 
 export const updateVacationLogic = async (vacation: VacationType): Promise<VacationType> => {
     validateUpdateVacation(vacation);
@@ -116,3 +117,12 @@ export const getAllNotStartedVacationsLogic = async (): Promise<VacationType[]> 
     const vacations = await executeSql(sql);
     return vacations;
 }
+
+export const getChartData = async (): Promise<VacationType[]> => {
+    const sql = `
+      SELECT v.destination, count(uv.id) as count FROM vacations v , uservacations uv WHERE v.id = uv.vacationid group by 1
+      `;
+    const vacations = await executeSql(sql);
+    return vacations;
+  };
+  

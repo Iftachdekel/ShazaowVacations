@@ -32,6 +32,7 @@ export const TourCard: React.FC<{
       <Typography variant="caption" sx={{ position: "absolute", top: "8px", left: "50%", transform: "translateX(-50%)" }}>
         {tour.startOn.toISOString().split('T')[0]} {/* Add this line */}
       </Typography>
+
       <IconButton
         sx={{ position: "absolute", top: "8px", right: "8px" }}
         color="error"

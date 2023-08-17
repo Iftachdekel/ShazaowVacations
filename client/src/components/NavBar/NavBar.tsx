@@ -2,7 +2,8 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./NavBar.css";
 import { useAuth } from "../AuthContext/AuthContext";
-import { Chip } from "@mui/material";
+import { Button, Chip } from "@mui/material";
+import { excelVacation } from "../../services/vacationsServices";
 
 interface User {
   role: "user" | "admin";
@@ -13,6 +14,17 @@ const NavBar: React.FC = () => {
   const { user, logout } = useAuth();
   const navigate = useNavigate(); // Initialize useNavigate
 
+  const handleEXCEL = async () => {
+    if (user?.token && user && user.role === "admin") {
+            try {
+        await excelVacation();
+      } catch (error) {
+        console.error("Error updating vacation:", error);
+      }
+    }
+  }
+
+
   const handleLogout = () => {
     logout();
     navigate("/"); // Navigate to the home page after logout
@@ -22,18 +34,21 @@ const NavBar: React.FC = () => {
   return (
     <nav className="navbar">
       <Link to="/" className="navbar-logo">
-        ShaZaow 
+        ShaZaow
       </Link>
+      {user && user.role === "admin" && <Button
+       sx={{ width: "30px", height: "30px", marginRight: "25px", color: "primary", border: "1px" }}
+        onClick={handleEXCEL}>Report.csv</Button>}
       <div>
-      {user && user.role === "admin" &&(
-        <Chip label="Admin's view" color="secondary" sx={{ 
-          backgroundColor: 'red', 
-          '& .MuiChip-label': {
-            color: 'white', 
-            marginRight:"30px"
-          }
-        }}/>
-      )}
+        {user && user.role === "admin" && (
+          <Chip label="Admin's view" color="secondary" sx={{
+            backgroundColor: 'red',
+            '& .MuiChip-label': {
+              color: 'white',
+              marginRight: "30px"
+            }
+          }} />
+        )}
         <Link to="/home" className="navbar-link">
           Home
         </Link>

@@ -46,7 +46,7 @@ const DestinationCard: React.FC<DestinationCardProps> = ({
   const [isFavorite, setIsFavorite] = useState(false);
   const navigate = useNavigate()
 
-  // const { user, logout } = useAuth();
+  
 
   useEffect(() => {
 
@@ -95,14 +95,16 @@ const DestinationCard: React.FC<DestinationCardProps> = ({
   const toggleFavorite = () => {
     setIsFavorite((prevFavorite) => {
       let newState = !prevFavorite
+      
       try {
-        if (user.user?.id && user.token) {
+        if (user.user?.id && user.user.token) {
           let userID = user.user?.id
           if (newState) {
-            addUserFavoriteVacation(+userID, id, user.token)
+            console.log('hi')
+            addUserFavoriteVacation(+userID, id, user.user.token)
           }
           else {
-            removeUserFavoriteVacation(+userID, id, user.token)
+            removeUserFavoriteVacation(+userID, id, user.user.token)
           }
         }
         onFavoriteClick();

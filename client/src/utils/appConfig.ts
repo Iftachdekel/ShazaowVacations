@@ -6,6 +6,9 @@ export const appConfig: AppConfigType = {
   usersUrl: "http://localhost:3003/api/users",
   baseUrl: "http://localhost:3003",
   favVacationUrl: "http://localhost:3003/api/uservacation",
-  vacationFollowers: "http://localhost:3003/api/followers/id",
+  vacationFollowers: "http://localhost:3003/api/followers",
   deletevacationUrl: "http://localhost:3003/api/vacations",
+  excelUrl:"http://localhost:3003/api/exporttoexcel",
+  chartdata:"http://localhost:3003/api",
+  
 };

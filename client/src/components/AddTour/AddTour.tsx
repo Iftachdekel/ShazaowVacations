@@ -5,14 +5,6 @@ import { addNewVacation } from "../../services/vacationsServices";
 import { useNavigate } from "react-router-dom";
 
 const AddTourForm = () => {
-  //   const [tour, setTour] = useState({
-  //     tourName: '',
-  //     destination: '',
-  //     description: '',
-  //     fromDate: '',
-  //     toDate: '',
-  //     price: '',
-  //   });
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -62,18 +54,7 @@ const AddTourForm = () => {
     console.log(tour);
     addNewVacation(tour)
       .then((res) => {
-        // Reset the form fields
-        // setTour({
-        //   id: 0,
-        //   destination: "",
-        //   description: "",
-        //   startOn: new Date(),
-        //   endOn: new Date(),
-        //   price: 0,
-        //   imageFile: "",
-        //   imageName: "",
-        // });
-        navigate('/home'); 
+                navigate('/tours'); 
       })
       .catch((err) => console.log(err));
   };

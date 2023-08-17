@@ -4,9 +4,9 @@ import {
   addVacationToFavorite,
   deleteVacationLogic,
   getAllActiveVacationsLogic,
-  getAllNotStartedVacationsLogic,
   getAllVacationsLogic,
   getAllVacationsOfUserLogic,
+  getChartData,
   updateVacationLogic,
 } from "../5 - Logic/vacations-logic";
 import { VacationType } from "../4 - Models/VacationModel";
@@ -15,11 +15,13 @@ import { verifyLoggedIn } from "../3 - Middleware/verify-loggedIn";
 import {
   addfollowLogic,
   deleteFollowLogic,
-  getAllFollowersLogic,
+  getAllFollowersForCounter,
+  // getAllFollowersForCounter,
 } from "../5 - Logic/followers-logic";
 import { filterFutureVacationsLogic, getOneVacationsLogic } from "../5 - Logic/filters-logic";
 
 const router = express.Router();
+
 
 // GET http://localhost:3001/api/vacations
 router.get(
@@ -107,7 +109,7 @@ router.post(
     try {
       // req.body.id= +req.params.id;
       const vacationId = req.body.vacationID;
-      const updateVacation = await addfollowLogic(req, vacationId);
+      const updateVacation = await addVacationToFavorite(req.body.userID, vacationId);
       res.json(updateVacation);
     } catch (err) {
       next(err);
@@ -128,12 +130,13 @@ router.delete(
   }
 );
 
+// get all amount of followers fot this vacation for counter
 router.get(
   "/followers/:id([0-9]+)",
   async (req: Request, res: Response, next: NextFunction) => {
     try {
       const id = +req.params.id;
-      const followers = await getAllFollowersLogic(id);
+      const followers = await getAllFollowersForCounter(id);
       res.json(followers);
     } catch (err) {
       next(err);
@@ -177,6 +180,21 @@ router.get(
   }
 );
 
+router.get(
+  "/vacations/chartdata",
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const vacations = await getChartData();
+      res.json(vacations);
+    } catch (err) {
+      next(err);
+    }
+  }
+);
 
 
-export default router;
+
+
+
+
+export default router

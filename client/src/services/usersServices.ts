@@ -21,9 +21,7 @@ export const getUser = async (id: number): Promise<UserType> => {
   return team;
 };
 
-// export const updateUser = async (team: UserType): Promise<void> => {
-//   await axios.put(appConfig.usersUrl + `/${team.user.id}`, team);
-// };
+
 
 export const addNewUser = async (user: UserType): Promise<void> => {
   await axios.post(appConfig.usersUrl, user.user);

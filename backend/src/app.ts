@@ -21,7 +21,7 @@ server.use("/assets", express.static(path.join(__dirname, '1 - Assets/images')))
 
 server.use("/api", vacationsController);
 server.use("/api", usersController);
-// server.use("/api", filtersController);
+server.use("/api", filtersController);
 server.use("/api/uservacation", userVacationController);
 server.use("*", routeNotFoundMW);
 server.use(catchAll)

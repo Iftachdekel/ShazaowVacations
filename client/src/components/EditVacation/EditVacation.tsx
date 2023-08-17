@@ -103,7 +103,7 @@ const UpdateVacation = () => {
         <input type="file" accept="image/*" {...register("imageFile")} />
         <Box sx={{ display: "flex", gap: "16px" }}>
           <Button
-            type="submit"
+              type="submit"
             variant="contained"
             color="primary">
             Update
