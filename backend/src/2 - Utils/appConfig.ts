@@ -4,7 +4,7 @@ export const appConfig: AppConfigType = {
     host: "localhost",
     user: "root",
     password: "",
-    database: "vacationsprojectnaomi",
+    database: "finalvacationdb",
     port: 3003
 }
 
