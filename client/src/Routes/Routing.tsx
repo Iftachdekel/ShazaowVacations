@@ -7,9 +7,10 @@ import Home from "../components/Home/Home";
 import AddTourForm from "../components/AddTour/AddTour";
 // import UpdateVacation from "../components/EditVacation/EditVacation";
 
-import AdminCharts from "../components/AdminCharts/AdminCharts";
+import AdminCharts from "../components/Charts/Charts";
 import UpdateVacation from "../components/EditVacation/EditVacation";
-import ChartComponent from "../components/AdminCharts/AdminCharts";
+import ChartComponent from "../components/Charts/Charts";
+import ChartRender from "../components/Charts/Charts";
 
 export const Routing = () => {
   const x: any = {};
@@ -24,7 +25,7 @@ export const Routing = () => {
         <Route path="/addtour" element={<AddTourForm />} />
         <Route path="/tours" element={<Tours />} />
         <Route path="/edit/:id" element={<UpdateVacation />} />
-        <Route path="/charts" element={<AdminCharts />} />
+        <Route path="/charts" element={<ChartRender />} />
       </Routes>
     </div>
   );

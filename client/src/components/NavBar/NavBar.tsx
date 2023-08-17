@@ -16,7 +16,7 @@ const NavBar: React.FC = () => {
 
   const handleEXCEL = async () => {
     if (user?.token && user && user.role === "admin") {
-            try {
+      try {
         await excelVacation(user.token);
       } catch (error) {
         console.error("Error updating vacation:", error);
@@ -27,7 +27,7 @@ const NavBar: React.FC = () => {
 
   const handleLogout = () => {
     logout();
-    navigate("/"); // Navigate to the home page after logout
+    navigate("/"); 
     sessionStorage.clear()
   };
 
@@ -37,7 +37,7 @@ const NavBar: React.FC = () => {
         ShaZaow
       </Link>
       {user && user.role === "admin" && <Button
-       sx={{ width: "30px", height: "30px", marginRight: "25px", color: "primary", border: "1px" }}
+        sx={{ width: "30px", height: "30px", marginRight: "25px", color: "primary", border: "1px" }}
         onClick={handleEXCEL}>Report.csv</Button>}
       <div>
         {user && user.role === "admin" && (
@@ -52,12 +52,13 @@ const NavBar: React.FC = () => {
         <Link to="/home" className="navbar-link">
           Home
         </Link>
-        {sessionStorage.getItem('token') && (
+        {user && (
           <Link to="/tours" className="navbar-link">
             Tours
           </Link>
         )}
-        {/* No special content for 'user' role indicated, so removed the empty block */}
+
+
         {user && user.role === "admin" && (
           <>
             <Link to="/addtour" className="navbar-link">

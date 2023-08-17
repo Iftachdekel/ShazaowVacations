@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {Box, TextField, TextareaAutosize, Button,Typography} from "@mui/material";
+import { Box, TextField, TextareaAutosize, Button, Typography } from "@mui/material";
 import { VacationType } from "../../types/VacationType";
 import { getOneVacation, updatVacation } from "../../services/vacationsServices";
 import { useNavigate, useParams } from "react-router-dom";
@@ -11,32 +11,52 @@ import { selectUser } from "../../features/userSlice";
 const UpdateVacation = () => {
   const navigate = useNavigate()
   const user = useAppSelector(selectUser)
-  const onCancel = () => {navigate("/tours")};
-  const {register,handleSubmit} = useForm<VacationType>();
-  const [currentVacation , setCurrentVacatin] = useState<VacationType>()
-  const {id} = useParams()
-  const handleUpdateVacation = async (vacation:VacationType) => {
-    if(id && user && user.token){
+  const onCancel = () => { navigate("/tours") };
+  const { register, handleSubmit } = useForm<VacationType>();
+  const [currentVacation, setCurrentVacation] = useState<VacationType | null>(null);
+  const [imgPreview, setImgPreview] = useState<string | null>(null);
+  const { id } = useParams()
+
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      const previewUrl = URL.createObjectURL(file);
+      setImgPreview(previewUrl);
+    }
+  };
+
+
+  const handleUpdateVacation = async (vacation: VacationType) => {
+
+    if (id && user && user.token) {
       try {
         console.log(vacation);
         console.log(id)
-          await updatVacation(vacation, +id,user.token).then(()=>{navigate('/home')});
-      
+        await updatVacation(vacation, +id, user.token).then(() => { navigate('/home') });
+
       } catch (error) {
         console.error("Error updating vacation:", error);
       }
     }
-    }
-    
-  useEffect(() =>{
-    const fetchVac = async () =>{
-      if(id){
-        await getOneVacation(+id).then(vac => setCurrentVacatin(vac) )
-        .catch(err => console.log(err))
+  }
+
+
+  useEffect(() => {
+    const fetchVac = async () => {
+      if (id) {
+        await getOneVacation(+id)
+          .then(vac => {
+            if (Array.isArray(vac) && vac.length > 0) {
+              setCurrentVacation(vac[0]);
+            } else if (typeof vac === "object" && vac !== null) {
+              setCurrentVacation(vac);
+            }
+          })
+          .catch(err => console.log(err))
       }
     }
-    fetchVac()
-  }, [])
+    fetchVac();
+  }, [id]);
 
   return (
     <Box
@@ -100,10 +120,20 @@ const UpdateVacation = () => {
           {...register("price")}
           required
         />
-        <input type="file" accept="image/*" {...register("imageFile")} />
+        <img 
+        src={imgPreview || currentVacation?.imageFile} 
+        alt={currentVacation?.imageName} 
+        style={{ width: "100%" }} 
+      />
+      <input 
+        type="file" 
+        accept="image/*" 
+        {...register("imageFile")} 
+        onChange={handleFileChange} 
+      />
         <Box sx={{ display: "flex", gap: "16px" }}>
           <Button
-              type="submit"
+            type="submit"
             variant="contained"
             color="primary">
             Update

@@ -51,7 +51,7 @@ router.get(
 
 router.post(
   "/vacations",
-  verifyAdminMW,
+  // verifyAdminMW,
   async (req: Request, res: Response, next: NextFunction) => {
     try {
       req.body.imageFile = req.files?.imageFile;
@@ -66,7 +66,7 @@ router.post(
 
 router.put(
   "/vacations/:id([0-9]+)",
-  verifyAdminMW,
+  
   async (req: Request, res: Response, next: NextFunction) => {
     try {
       req.body.id = +req.params.id;

@@ -6,7 +6,7 @@ import { Chart, registerables } from "chart.js";
 
 Chart.register(...registerables);
 
-const AdminCharts: React.FC = () => {
+const ChartRender: React.FC = () => {
   const [chartData, setChartData] = useState<any>({});
   
   useEffect(() => {
@@ -103,4 +103,4 @@ const AdminCharts: React.FC = () => {
   );
 };
 
-export default AdminCharts;
+export default ChartRender;
